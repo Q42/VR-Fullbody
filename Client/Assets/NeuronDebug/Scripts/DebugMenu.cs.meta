@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: a31d2db42b4d53f43a2b4406058cec3a
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - replicaPrefab: {fileID: 175874, guid: c32a6ede15da1654d828603e439d07e2, type: 2}
+  - UIElements: {instanceID: 0}
+  - VerticalGrid: {instanceID: 0}
+  - MainCamera: {instanceID: 0}
+  - IPField: {instanceID: 0}
+  - PortField: {instanceID: 0}
+  - NewActorOffsetZ: {instanceID: 0}
+  - UDPToggle: {instanceID: 0}
+  - ButtonLabel: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
