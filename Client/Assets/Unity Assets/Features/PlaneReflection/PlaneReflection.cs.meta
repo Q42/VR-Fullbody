@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: e3f30ae689ef012419185bba2058de65
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - convolveShader: {fileID: 4800000, guid: d9a320f83343d6045a4e3a1eb8cf4d64, type: 3}
+  - maskShader: {fileID: 4800000, guid: 02cf5fe76e095a045ab34e6166d0ed25, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
