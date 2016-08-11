@@ -30,20 +30,23 @@ namespace Retargeting
 
         void OnStart()
         {
-            ScaleFactor = CalculateScaleFactor();
+            
         }
 
         // Update is called once per frame
         void Update()
         {
+			UpdateRootPosition();
             UpdateBoneRotations();
+			FixFeetPosition();
         }
 
         void OnEnable()
         {
             Source = NeuronConnection.Connect(Address, Port, CommandServerPort, SocketType);
+			ScaleFactor = CalculateScaleFactor();
 
-            if (Source != null)
+			if (Source != null)
             {
                 Actor = Source.AcquireActor(ActorId);
             }
@@ -63,10 +66,10 @@ namespace Retargeting
         private float CalculateScaleFactor() {
             const float baseHipsHeight = 1.113886f;
 
-            float feetPosition = (SkeletalBones[HumanBodyBones.LeftFoot].position.y + SkeletalBones[HumanBodyBones.RightFoot].position.y) * 0.5f;
-            feetPosition -= (CharacterAnimator.leftFeetBottomHeight + CharacterAnimator.leftFeetBottomHeight) * 0.5f;
+            float feetPosition = (CharacterAnimator.GetBoneTransform(HumanBodyBones.LeftFoot).position.y + CharacterAnimator.GetBoneTransform(HumanBodyBones.RightFoot).position.y) * 0.5f;
+            feetPosition -= (CharacterAnimator.leftFeetBottomHeight + CharacterAnimator.rightFeetBottomHeight) * 0.5f;
 
-            return (SkeletalBones[HumanBodyBones.Hips].position.y - feetPosition) / baseHipsHeight;
+            return (CharacterAnimator.GetBoneTransform(HumanBodyBones.Hips).position.y - feetPosition) / baseHipsHeight;
         }
 
         private void UpdateBoneRotations()
@@ -87,6 +90,24 @@ namespace Retargeting
 
             SetBonePosition(HumanBodyBones.Hips, resetRotation * position * ScaleFactor);
         }
+
+		private void FixFeetPosition()
+		{
+			Vector3 left = CharacterAnimator.GetBoneTransform(HumanBodyBones.LeftFoot).position;
+			Vector3 right = CharacterAnimator.GetBoneTransform(HumanBodyBones.RightFoot).position;
+
+			Transform hips = CharacterAnimator.GetBoneTransform(HumanBodyBones.Hips);
+
+			float offset = 0.0f;
+
+			if (left.y < right.y)
+			{
+				hips.position -= Vector3.up * (left.y - CharacterAnimator.leftFeetBottomHeight);
+				return;
+			}
+
+			hips.position -= Vector3.up * (right.y - CharacterAnimator.rightFeetBottomHeight);
+		}
 
         private Quaternion CalculateBoneRotation(HumanBodyBones humanBone, NeuronBones neuronBone)
         {

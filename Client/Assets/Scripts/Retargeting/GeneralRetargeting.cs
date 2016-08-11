@@ -54,7 +54,7 @@ namespace Retargeting
             }
             else
             {
-                Debug.LogWarning("GENERAL RETARGETING: Retargeting is impossible for non humanoid character rigs");
+                Debug.LogWarning("[General Retargeting] Retargeting is impossible for non humanoid character rigs");
             }
         }
 
@@ -114,7 +114,7 @@ namespace Retargeting
             }
             else
             {
-                Debug.LogError("GENERAL RETARGETING: The provided bone is not provided by the animator's character rig");
+                Debug.LogError("[General Retargeting] The provided bone is not provided by the animator's character rig");
             }
         }
 
@@ -133,7 +133,7 @@ namespace Retargeting
             }
             else
             {
-                Debug.LogError("GENERAL RETARGETING: The provided bone is not provided by the animator's character rig");
+                Debug.LogError("[General Retargeting] The provided bone is not provided by the animator's character rig");
             }
         }
     }
